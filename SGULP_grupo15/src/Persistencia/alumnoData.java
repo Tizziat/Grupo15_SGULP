@@ -102,4 +102,46 @@ public class alumnoData {
         
         return alumnos;
     }
+        
+      // 4. UPDATE SET ALUMNO (Actualizar datos)
+    public void actualizarAlumno(alumno a) {
+        String query = "UPDATE alumno SET dni = ?, nombre = ?, fechaNac = ?, activo = ? WHERE idAlumno = ?"; // 1
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query); // 2
+            ps.setInt(1, a.getDni());
+            ps.setString(2, a.getNombre());
+            ps.setDate(3, Date.valueOf(a.getFechaNac()));
+            ps.setBoolean(4, a.isActivo());
+            ps.setInt(5, a.getIdAlumno()); //
+            
+            int exito = ps.executeUpdate(); // 3
+            if (exito == 1) {
+                System.out.println("Alumno actualizado correctamente.");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 5. DELETE FROM ALUMNO (Borrar físicamente)
+    public void borrarAlumno(int id) {
+        String query = "DELETE FROM alumno WHERE idAlumno = ?"; // 1
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query); // 2
+            ps.setInt(1, id);
+            
+            int exito = ps.executeUpdate(); // 3
+            if (exito == 1) {
+                System.out.println("Alumno eliminado de la base de datos.");
+            }
+            ps.close(); // 4
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
