@@ -30,7 +30,7 @@ USE `universidad_grupo15`;
 
 CREATE TABLE `alumno` (
   `idAlumno` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
+  `dni` int(11) NOT NULL UNIQUE,
   `nombre` varchar(30) NOT NULL,
   `fechaNac` date NOT NULL,
   `activo` tinyint(1) NOT NULL
