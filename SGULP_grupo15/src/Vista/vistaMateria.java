@@ -4,6 +4,12 @@
  */
 package Vista;
 
+import Modelo.materia;
+import Persistencia.materiaData;
+import java.util.List;
+import javax.swing.ButtonGroup;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tizzi
@@ -15,6 +21,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
      */
     public vistaMateria() {
         initComponents();
+    ButtonGroup grupoEstado = new ButtonGroup();
+    grupoEstado.add(jRBactiva);
+    grupoEstado.add(jRBinactiva);
+
+    jRBactiva.setSelected(true);
     }
 
     /**
@@ -42,7 +53,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         jRBactiva = new javax.swing.JRadioButton();
         jRBinactiva = new javax.swing.JRadioButton();
         jBbuscar = new javax.swing.JButton();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTresultado = new javax.swing.JTable();
         jBnuevo = new javax.swing.JButton();
@@ -64,6 +75,8 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        setPreferredSize(new java.awt.Dimension(476, 500));
 
         jLtitulo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLtitulo.setText("Administracion de Materias");
@@ -103,9 +116,14 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         });
 
         jBbuscar.setText("Buscar");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
 
-        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        escritorio.setBackground(new java.awt.Color(204, 204, 204));
+        escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTresultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,12 +139,32 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTresultado);
 
         jBnuevo.setText("Nuevo");
+        jBnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBnuevoActionPerformed(evt);
+            }
+        });
 
         jBguardar.setText("Guardar");
+        jBguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarActionPerformed(evt);
+            }
+        });
 
         jBactualizar.setText("Actualizar");
+        jBactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBactualizarActionPerformed(evt);
+            }
+        });
 
         jBaltaBaja.setText("Alta/Baja");
+        jBaltaBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBaltaBajaActionPerformed(evt);
+            }
+        });
 
         jBborrar.setText("Borrar");
         jBborrar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +174,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         });
 
         jBmostrar.setText("Mostrar todas las materias");
+        jBmostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmostrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,42 +197,45 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                                 .addComponent(jRBactiva)
                                 .addGap(18, 18, 18)
                                 .addComponent(jRBinactiva))
-                            .addComponent(jTFaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTFaño, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLcodigo)
                             .addComponent(jLnombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLtitulo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBbuscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBbuscar)))))
+                                    .addComponent(jLtitulo)
+                                    .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBnuevo)
-                .addGap(18, 18, 18)
-                .addComponent(jBguardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBactualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBaltaBaja)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBborrar)
-                .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(jBmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBnuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBguardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBactualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBaltaBaja)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBborrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jBmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -203,11 +249,14 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                             .addComponent(jLcodigo)
                             .addComponent(jTFcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBbuscar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLnombre)
-                            .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLnombre)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                .addGap(15, 15, 15)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLaño)
                             .addComponent(jTFaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,19 +266,19 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jRBactiva)
                                 .addComponent(jRBinactiva))))
-                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBnuevo)
                     .addComponent(jBguardar)
-                    .addComponent(jBactualizar)
                     .addComponent(jBaltaBaja)
-                    .addComponent(jBborrar))
-                .addGap(18, 18, 18)
+                    .addComponent(jBborrar)
+                    .addComponent(jBactualizar))
+                .addGap(31, 31, 31)
                 .addComponent(jBmostrar)
-                .addGap(14, 14, 14))
+                .addGap(83, 83, 83))
         );
 
         pack();
@@ -252,14 +301,222 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBinactivaActionPerformed
 
     private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
-        // TODO add your handling code here:
+         if (jTFcodigo.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Primero debe buscar una materia."
+        );
+        return;
+    }
+
+    int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro que quiere eliminar esta materia?",
+        "Confirmar eliminación",
+        javax.swing.JOptionPane.YES_NO_OPTION
+    );
+
+    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        try {
+            int codigo = Integer.parseInt(jTFcodigo.getText().trim());
+
+            materiaData md = new materiaData();
+            md.borrarMateria(codigo);
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Se borro correctamente."
+            );
+
+            jTFcodigo.setText("");
+            jTFnombre.setText("");
+            jTFaño.setText("");
+            jRBactiva.setSelected(true);
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Código incorrecto."
+            );
+        }
+    
+}
     }//GEN-LAST:event_jBborrarActionPerformed
+
+    private void jBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnuevoActionPerformed
+    jTFcodigo.setText("");
+    jTFnombre.setText("");
+    jTFaño.setText("");
+
+    jRBactiva.setSelected(true);
+    jTFcodigo.setEditable(false);
+    jTFnombre.requestFocus();
+    }//GEN-LAST:event_jBnuevoActionPerformed
+
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+      try{
+          int codigo =  Integer.parseInt(jTFcodigo.getText().trim());
+
+        materiaData md = new materiaData();
+        materia m = md.buscarMateria(codigo);
+
+        if (m != null) {
+            jTFnombre.setText(m.getNombre());
+            jTFaño.setText(String.valueOf(m.getAnio()));
+
+            if (m.isEstado()) {
+                jRBactiva.setSelected(true);
+            } else {
+                jRBinactiva.setSelected(true);
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "No se encontró la materia."
+            );
+        }
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Ingrese un código válido."
+        );
+    }
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        String nombre = jTFnombre.getText().trim();
+        String añoTexto = jTFaño.getText().trim();
+
+    if (nombre.isEmpty() || añoTexto.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Complete el nombre y el año."
+        );
+        return;
+    }
+
+    try {
+        int anio = Integer.parseInt(añoTexto);
+        boolean estado = jRBactiva.isSelected();
+
+        materia m = new materia(nombre, anio, estado);
+        materiaData md = new materiaData();
+
+        md.guardarMateria(m);
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Materia guardada correctamente."
+        );
+
+        jTFcodigo.setText("");
+        jTFnombre.setText("");
+        jTFaño.setText("");
+        jRBactiva.setSelected(true);
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "El año debe ser un número."
+        );
+    }
+
+    }//GEN-LAST:event_jBguardarActionPerformed
+
+    private void jBaltaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaltaBajaActionPerformed
+         if (jTFcodigo.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Primero debe buscar una materia."
+        );
+        return;
+    }
+
+    try {
+        int codigo = Integer.parseInt(jTFcodigo.getText().trim());
+
+        materiaData md = new materiaData();
+
+        if (jRBactiva.isSelected()) {
+            md.altaLogica(codigo);
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Materia dada de alta."
+            );
+        } else if (jRBinactiva.isSelected()) {
+            md.bajaLogica(codigo);
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Materia dada de baja."
+            );
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Seleccione Activa o Inactiva."
+            );
+        }
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Código incorrecto."
+        );
+    }
+    }//GEN-LAST:event_jBaltaBajaActionPerformed
+
+    private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
+         if (jTFcodigo.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Primero debe buscar una materia."
+        );
+        return;
+    }
+
+    String nombre = jTFnombre.getText().trim();
+    String anioTexto = jTFaño.getText().trim();
+
+    if (nombre.isEmpty() || anioTexto.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Complete el nombre y el año."
+        );
+        return;
+    }
+
+    try {
+        int codigo = Integer.parseInt(jTFcodigo.getText().trim());
+        int anio = Integer.parseInt(anioTexto);
+        boolean estado = jRBactiva.isSelected();
+
+        materia m = new materia(codigo, nombre, anio, estado);
+        materiaData md = new materiaData();
+
+        md.actualizarMateria(m);
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Materia actualizada."
+        );
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "El código y el año deben ser números."
+        );
+    }
+    }//GEN-LAST:event_jBactualizarActionPerformed
+
+    private void jBmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmostrarActionPerformed
+
+
+    materiaData md = new materiaData();
+    List<materia> materias = md.mostrarTodasMaterias();
+
+    javax.swing.table.DefaultTableModel modelo =
+        (javax.swing.table.DefaultTableModel) jTresultado.getModel();
+
+    modelo.setRowCount(0);
+
+    for (materia m : materias) {
+        modelo.addRow(new Object[]{
+            m.getIdMateria(),
+            m.getNombre(),
+            m.getAnio(),
+            m.isEstado() ? "Activa" : "Inactiva"
+        });
+    }
+    }//GEN-LAST:event_jBmostrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jBactualizar;
     private javax.swing.JButton jBaltaBaja;
     private javax.swing.JButton jBborrar;
@@ -267,7 +524,6 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBguardar;
     private javax.swing.JButton jBmostrar;
     private javax.swing.JButton jBnuevo;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLaño;
     private javax.swing.JLabel jLcodigo;
     private javax.swing.JLabel jLestado;

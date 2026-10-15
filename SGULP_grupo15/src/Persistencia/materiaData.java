@@ -184,6 +184,34 @@ public class materiaData {
             System.out.println("Error al borrar materia: " + ex.getMessage());
         }
     }
+    public List<materia> mostrarTodasMaterias() {
+    List<materia> materias = new ArrayList<>();
+
+    String sql = "SELECT * FROM materia";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            materia m = new materia();
+
+            m.setIdMateria(rs.getInt("idMateria"));
+            m.setNombre(rs.getString("nombre"));
+            m.setAnio(rs.getInt("año"));
+            m.setEstado(rs.getBoolean("estado"));
+
+            materias.add(m);
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        System.out.println("Error al mostrar materias: " + ex.getMessage());
+    }
+
+    return materias;
+}
 }
     
     
