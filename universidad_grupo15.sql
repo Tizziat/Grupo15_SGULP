@@ -60,6 +60,7 @@ CREATE TABLE `cursada` (
 CREATE TABLE `materia` (
   `idMateria` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
+  `anio` int(11) NOT NULL,
   `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
