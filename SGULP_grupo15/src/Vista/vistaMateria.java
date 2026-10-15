@@ -26,21 +26,261 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLtitulo = new javax.swing.JLabel();
+        jLcodigo = new javax.swing.JLabel();
+        jLnombre = new javax.swing.JLabel();
+        jLaño = new javax.swing.JLabel();
+        jLestado = new javax.swing.JLabel();
+        jTFcodigo = new javax.swing.JTextField();
+        jTFnombre = new javax.swing.JTextField();
+        jTFaño = new javax.swing.JTextField();
+        jRBactiva = new javax.swing.JRadioButton();
+        jRBinactiva = new javax.swing.JRadioButton();
+        jBbuscar = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTresultado = new javax.swing.JTable();
+        jBnuevo = new javax.swing.JButton();
+        jBguardar = new javax.swing.JButton();
+        jBactualizar = new javax.swing.JButton();
+        jBaltaBaja = new javax.swing.JButton();
+        jBborrar = new javax.swing.JButton();
+        jBmostrar = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLtitulo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        jLtitulo.setText("Administracion de Materias");
+
+        jLcodigo.setText("Codigo:");
+
+        jLnombre.setText("Nombre:");
+
+        jLaño.setText("Año de cursada:");
+
+        jLestado.setText("Estado:");
+
+        jTFcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFcodigoActionPerformed(evt);
+            }
+        });
+
+        jTFnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFnombreActionPerformed(evt);
+            }
+        });
+
+        jRBactiva.setText("Activa");
+        jRBactiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBactivaActionPerformed(evt);
+            }
+        });
+
+        jRBinactiva.setText("Inactiva");
+        jRBinactiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBinactivaActionPerformed(evt);
+            }
+        });
+
+        jBbuscar.setText("Buscar");
+
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
+        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTresultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Año", "Estado"
+            }
+        ));
+        jScrollPane2.setViewportView(jTresultado);
+
+        jBnuevo.setText("Nuevo");
+
+        jBguardar.setText("Guardar");
+
+        jBactualizar.setText("Actualizar");
+
+        jBaltaBaja.setText("Alta/Baja");
+
+        jBborrar.setText("Borrar");
+        jBborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBborrarActionPerformed(evt);
+            }
+        });
+
+        jBmostrar.setText("Mostrar todas las materias");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLaño)
+                            .addComponent(jLestado))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jRBactiva)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRBinactiva))
+                            .addComponent(jTFaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLcodigo)
+                            .addComponent(jLnombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLtitulo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBbuscar)))))
+                .addGap(39, 39, 39))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBnuevo)
+                .addGap(18, 18, 18)
+                .addComponent(jBguardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBactualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBaltaBaja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBborrar)
+                .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(jBmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLtitulo)
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLcodigo)
+                            .addComponent(jTFcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBbuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLnombre)
+                            .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLaño)
+                            .addComponent(jTFaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLestado)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jRBactiva)
+                                .addComponent(jRBinactiva))))
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBnuevo)
+                    .addComponent(jBguardar)
+                    .addComponent(jBactualizar)
+                    .addComponent(jBaltaBaja)
+                    .addComponent(jBborrar))
+                .addGap(18, 18, 18)
+                .addComponent(jBmostrar)
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFcodigoActionPerformed
+
+    private void jRBactivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBactivaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBactivaActionPerformed
+
+    private void jTFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFnombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFnombreActionPerformed
+
+    private void jRBinactivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBinactivaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBinactivaActionPerformed
+
+    private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBborrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JButton jBactualizar;
+    private javax.swing.JButton jBaltaBaja;
+    private javax.swing.JButton jBborrar;
+    private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBguardar;
+    private javax.swing.JButton jBmostrar;
+    private javax.swing.JButton jBnuevo;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLaño;
+    private javax.swing.JLabel jLcodigo;
+    private javax.swing.JLabel jLestado;
+    private javax.swing.JLabel jLnombre;
+    private javax.swing.JLabel jLtitulo;
+    private javax.swing.JRadioButton jRBactiva;
+    private javax.swing.JRadioButton jRBinactiva;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTFaño;
+    private javax.swing.JTextField jTFcodigo;
+    private javax.swing.JTextField jTFnombre;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTresultado;
     // End of variables declaration//GEN-END:variables
 }

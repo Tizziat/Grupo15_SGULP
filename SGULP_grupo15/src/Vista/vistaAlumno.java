@@ -60,9 +60,14 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
         jlNombreApellido.setText("Apellido y Nombre");
 
-        jlActivo.setText("Activo");
+        jlActivo.setText("Estado");
 
         jCheckBoxSi.setText("SI");
+        jCheckBoxSi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxSiActionPerformed(evt);
+            }
+        });
 
         jCheckBoxNo.setText("NO");
 
@@ -170,8 +175,8 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlDNI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNombreApellido)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlNombreApellido, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -211,6 +216,10 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jCheckBoxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxSiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxSiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
