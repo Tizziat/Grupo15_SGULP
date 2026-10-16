@@ -31,8 +31,8 @@ public class materiaData {
     
     // 1. INSERT INTO MATERIA
     public void guardarMateria(materia m) {
-        String sql = "INSERT INTO materia (nombre, año, estado) VALUES (?, ?, ?)";//1 
-
+        String sql = "INSERT INTO materia (nombre, anio, estado) VALUES (?, ?, ?)";//1 
+        System.out.println("SQL QUE SE EJECUTA: " + sql);
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);//2
             ps.setString(1, m.getNombre());
@@ -67,7 +67,7 @@ public class materiaData {
                 m = new materia();
                 m.setIdMateria(rs.getInt("idMateria"));
                 m.setNombre(rs.getString("nombre"));
-                m.setAnio(rs.getInt("año"));
+                m.setAnio(rs.getInt("anio"));
                 m.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
@@ -92,7 +92,7 @@ public class materiaData {
                 materia m = new materia();
                 m.setIdMateria(rs.getInt("idMateria"));
                 m.setNombre(rs.getString("nombre"));
-                m.setAnio(rs.getInt("año"));
+                m.setAnio(rs.getInt("anio"));
                 m.setEstado(rs.getBoolean("estado"));
 
                 materias.add(m);
@@ -108,7 +108,7 @@ public class materiaData {
 
     // 4. UPDATE SET MATERIA (actualizamos datos)
     public void actualizarMateria(materia m) {
-        String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
+        String sql = "UPDATE materia SET nombre = ?, anio = ?, estado = ? WHERE idMateria = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -184,35 +184,6 @@ public class materiaData {
             System.out.println("Error al borrar materia: " + ex.getMessage());
         }
     }
-    public List<materia> mostrarTodasMaterias() {
-    List<materia> materias = new ArrayList<>();
-
-    String sql = "SELECT * FROM materia";
-
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()) {
-            materia m = new materia();
-
-            m.setIdMateria(rs.getInt("idMateria"));
-            m.setNombre(rs.getString("nombre"));
-            m.setAnio(rs.getInt("año"));
-            m.setEstado(rs.getBoolean("estado"));
-
-            materias.add(m);
-        }
-
-        ps.close();
-
-    } catch (SQLException ex) {
-        System.out.println("Error al mostrar materias: " + ex.getMessage());
-    }
-
-    return materias;
 }
-}
-    
-    
+
 

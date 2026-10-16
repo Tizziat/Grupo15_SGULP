@@ -26,6 +26,17 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     grupoEstado.add(jRBinactiva);
 
     jRBactiva.setSelected(true);
+    
+    setLocation(0, 0);
+    setResizable(false);
+    setMaximizable(false);
+    setIconifiable(false);
+    setClosable(false);
+    javax.swing.plaf.InternalFrameUI ui = getUI();
+if (ui instanceof javax.swing.plaf.basic.BasicInternalFrameUI) {
+    ((javax.swing.plaf.basic.BasicInternalFrameUI) ui)
+        .setNorthPane(null);
+    }
     }
 
     /**
@@ -344,8 +355,8 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     jTFnombre.setText("");
     jTFaño.setText("");
 
+    jTFcodigo.setEditable(true);
     jRBactiva.setSelected(true);
-    jTFcodigo.setEditable(false);
     jTFnombre.requestFocus();
     }//GEN-LAST:event_jBnuevoActionPerformed
 
@@ -396,6 +407,8 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         materiaData md = new materiaData();
 
         md.guardarMateria(m);
+        jTFcodigo.setText(String.valueOf(m.getIdMateria()));
+
 
         javax.swing.JOptionPane.showMessageDialog(
             this, "Materia guardada correctamente."
@@ -493,7 +506,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
 
 
     materiaData md = new materiaData();
-    List<materia> materias = md.mostrarTodasMaterias();
+    List<materia> materias = md.listarMaterias();
 
     javax.swing.table.DefaultTableModel modelo =
         (javax.swing.table.DefaultTableModel) jTresultado.getModel();
