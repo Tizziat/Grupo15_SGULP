@@ -45,6 +45,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jlTitulo = new javax.swing.JLabel();
         jlDatos = new javax.swing.JLabel();
@@ -97,6 +98,11 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jbNuevo.setText("Nuevo");
@@ -141,6 +147,8 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jRBactiva);
+        jRBactiva.setSelected(true);
         jRBactiva.setText("Activo");
         jRBactiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +156,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jRBinactiva);
         jRBinactiva.setText("Inactivo");
         jRBinactiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,10 +330,17 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        
+        if (jtfDNI.getText().trim().isEmpty() && fila != -1) {
+            jtfDNI.setText(jTable1.getValueAt(fila, 1).toString());
+        }
+        
         if (jtfDNI.getText().trim().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Primero debe seleccionar una alumno o ingresar su DNI.");
             return;
         }
+                
         int respuesta = javax.swing.JOptionPane.showConfirmDialog(
                 this,
                 "¿Está seguro que quiere eliminar este alumno?",
@@ -337,10 +353,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
             alumnoData ad = new alumnoData();
             ad.borrarAlumno(dni);
-            jtfDNI.setText("");
-            jtfNombreApellido.setText("");
-            jtfFechaNac.setText("");
-
+            
             javax.swing.JOptionPane.showMessageDialog(
                     this, "Alumno eliminado correctamente."
             );
@@ -349,7 +362,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             jtfNombreApellido.setText("");
             jtfFechaNac.setText("");
             jRBactiva.setSelected(true);
-
+            
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(
                     this, "El DNI debe ser un número entero."
@@ -366,6 +379,12 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
         if (dniTexto.isEmpty() || apynom.isEmpty() || fechaNacTexto.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+            return;
+        }
+        
+        if(!jRBactiva.isSelected() && !jRBinactiva.isSelected()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un estado para el alumno.");
+            jRBactiva.setSelected(true);
             return;
         }
 
@@ -387,6 +406,11 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
             javax.swing.JOptionPane.showMessageDialog(this, "Alumno guardado correctamente.");
 
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+            jRBactiva.setSelected(true);
+                        
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(
                     this, "El DNI debe ser un número entero."
@@ -429,6 +453,12 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        
+        if (jtfDNI.getText().trim().isEmpty() && fila != -1) {
+            jtfDNI.setText(jTable1.getValueAt(fila, 1).toString());
+        }
+        
         if (jtfDNI.getText().trim().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Primero debe buscar un alumno o ingresar su dni.");
             return;
@@ -450,8 +480,15 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             ad.actualizarAlumno(a);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente.");
-            return;
 
+            jbMostrarActionPerformed(null);
+            
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+            jRBactiva.setSelected(true);
+            
+            
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(
                     this, "En DNI debe ser un número entero."
@@ -466,6 +503,12 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
 
     private void jbAltaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaBajaActionPerformed
         // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+
+        if (jtfDNI.getText().trim().isEmpty() && fila != -1) {
+            jtfDNI.setText(jTable1.getValueAt(fila, 1).toString());
+        }
+
         if (jtfDNI.getText().trim().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Primero debe buscar un alumno o ingresar su dni.");
             return;
@@ -475,23 +518,41 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(jtfDNI.getText().trim());
             alumnoData ad = new alumnoData();
 
-            if (jRBactiva.isSelected()) {
-                ad.altaLogica(dni);
-                //javax.swing.JOptionPane.showMessageDialog(this, "Alumno dado de alta.");
-            } else if (jRBinactiva.isSelected()) {
-                ad.bajaLogica(dni);
-                //javax.swing.JOptionPane.showMessageDialog(this, "Alumno dado de baja.");
+            if (fila != -1) {
+                String estadoActual = jTable1.getValueAt(fila, 4).toString();
+                if (estadoActual.equalsIgnoreCase("Activo")) {
+                    ad.bajaLogica(dni);
+                } else {
+                    ad.altaLogica(dni);
+                }
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Seleccione Activo o Inactivo.");
-            }
+                if (jRBactiva.isSelected()) {
+                    ad.altaLogica(dni);
+                } else {
+                    ad.bajaLogica(dni);
+                }
+            }            
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+            jRBactiva.setSelected(true);
 
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "DNI incorrecto.");
         }
+
     }//GEN-LAST:event_jbAltaBajaActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+        
+        String dniTexto = jtfDNI.getText().trim();
+        
+        if(dniTexto.isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar.");
+            requestFocus();
+            return;
+        }
         try {
             int dni = Integer.parseInt(jtfDNI.getText().trim());
 
@@ -519,7 +580,18 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        if(fila != -1){
+            jtfDNI.setText(jTable1.getValueAt(fila, 1).toString());
+            jtfNombreApellido.setText(jTable1.getValueAt(fila, 2).toString());
+            jtfFechaNac.setText(jTable1.getValueAt(fila, 3).toString());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JRadioButton jRBactiva;
     private javax.swing.JRadioButton jRBinactiva;

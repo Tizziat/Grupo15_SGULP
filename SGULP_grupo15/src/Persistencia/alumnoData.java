@@ -50,14 +50,13 @@ public class alumnoData {
     }
 
     // 2. SELECT 1 ALUMNO (Buscar por ID)
-    public alumno buscarAlumno(int id) {
+    public alumno buscarAlumno(int dni) {
+        String sql = "SELECT * FROM alumno WHERE dni = ?"; // 1
         alumno a = null;
-        String sql = "SELECT * FROM alumno WHERE idAlumno = ?"; // 1
         
         try {
             PreparedStatement ps = con.prepareStatement(sql); // 2
-            ps.setInt(1, id);
-            
+            ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery(); // 3
             
             if (rs.next()) { 
@@ -67,10 +66,13 @@ public class alumnoData {
                 a.setNombre(rs.getString("nombre"));
                 a.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 a.setActivo(rs.getBoolean("activo"));
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null, "No se encontro ningun alumno con el DNI ingresado.");
             }
             ps.close(); // 5
             
         } catch (SQLException ex) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Error al buscar alumno.");
             Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
@@ -106,19 +108,20 @@ public class alumnoData {
         
       // 4. UPDATE SET ALUMNO (Actualizar datos)
     public void actualizarAlumno(alumno a) {
-        String query = "UPDATE alumno SET dni = ?, nombre = ?, fechaNac = ?, activo = ? WHERE idAlumno = ?"; // 1
+        String query = "UPDATE alumno SET nombre = ?, fechaNac = ?, activo = ? WHERE dni = ?"; // 1
         
         try {
             PreparedStatement ps = con.prepareStatement(query); // 2
-            ps.setInt(1, a.getDni());
-            ps.setString(2, a.getNombre());
-            ps.setDate(3, Date.valueOf(a.getFechaNac()));
-            ps.setBoolean(4, a.isActivo());
-            ps.setInt(5, a.getIdAlumno()); //
+            ps.setString(1, a.getNombre());
+            ps.setDate(2, Date.valueOf(a.getFechaNac()));
+            ps.setBoolean(3, a.isActivo());
+            ps.setInt(4, a.getDni());
             
             int exito = ps.executeUpdate(); // 3
             if (exito == 1) {
                 System.out.println("Alumno actualizado correctamente.");
+            } else {
+                System.out.println("No se encontro ningun alumno con ese DNI.");
             }
             ps.close();
             
@@ -128,20 +131,23 @@ public class alumnoData {
     }
 
     // 5. DELETE FROM ALUMNO (Borrar físicamente)
-    public void borrarAlumno(int id) {
-        String query = "DELETE FROM alumno WHERE idAlumno = ?"; // 1
+    public void borrarAlumno(int dni) {
+        String query = "DELETE FROM alumno WHERE dni = ?"; // 1
         
         try {
             PreparedStatement ps = con.prepareStatement(query); // 2
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             
             int exito = ps.executeUpdate(); // 3
             if (exito == 1) {
-                System.out.println("Alumno eliminado de la base de datos.");
+                JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun alumno con ese DNI.");
             }
             ps.close(); // 4
             
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el alumno" + ex.getMessage());
             Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
