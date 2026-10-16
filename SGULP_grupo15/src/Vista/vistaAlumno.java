@@ -4,6 +4,13 @@
  */
 package Vista;
 
+import Modelo.alumno;
+import Persistencia.alumnoData;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author tizzi
@@ -15,6 +22,18 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
      */
     public vistaAlumno() {
         initComponents();
+        armarCabecera();
+    }
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
+    private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido y Nombre");
+        modelo.addColumn("Fecha Nacimiento");
+        modelo.addColumn("Activo");
+        jTable1.setModel(modelo);
     }
 
     /**
@@ -45,9 +64,10 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         jbBorrar = new javax.swing.JButton();
         jbMostrar = new javax.swing.JButton();
         jRBactiva = new javax.swing.JRadioButton();
-        jRBactiva1 = new javax.swing.JRadioButton();
+        jRBinactiva = new javax.swing.JRadioButton();
         jtfFechaNac = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jlFormato = new javax.swing.JLabel();
 
         jlTitulo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jlTitulo.setText("Gestion De Alumnos");
@@ -80,16 +100,46 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbAltaBaja.setText("Alta/Baja");
+        jbAltaBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaBajaActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jbMostrar.setText("Mostrar Alumnos");
+        jbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMostrarActionPerformed(evt);
+            }
+        });
 
         jRBactiva.setText("Activo");
         jRBactiva.addActionListener(new java.awt.event.ActionListener() {
@@ -98,16 +148,24 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jRBactiva1.setText("Inactivo");
-        jRBactiva1.addActionListener(new java.awt.event.ActionListener() {
+        jRBinactiva.setText("Inactivo");
+        jRBinactiva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBactiva1ActionPerformed(evt);
+                jRBinactivaActionPerformed(evt);
             }
         });
 
-        jtfFechaNac.setText("YYYY-MM-DD");
+        jtfFechaNac.setColumns(12);
+        jtfFechaNac.setPreferredSize(new java.awt.Dimension(120, 22));
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jlFormato.setText("(en formato YYYY-MM-DD)");
 
         jDesktopPane1.setLayer(jlTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlDatos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -126,9 +184,10 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jbBorrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbMostrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jRBactiva, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jRBactiva1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jRBinactiva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfFechaNac, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlFormato, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -151,13 +210,19 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jtfNombreApellido)
-                                            .addComponent(jtfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jRBactiva)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(jRBactiva1)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                        .addComponent(jRBactiva)
+                                                        .addGap(30, 30, 30)
+                                                        .addComponent(jRBinactiva)))
+                                                .addGap(163, 163, 163))
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                .addComponent(jtfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jlFormato)
+                                                .addGap(66, 66, 66))))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jbBuscar)))))
@@ -209,12 +274,13 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlFechaNac)
-                    .addComponent(jtfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlFormato))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlActivo)
                     .addComponent(jRBactiva)
-                    .addComponent(jRBactiva1))
+                    .addComponent(jRBinactiva))
                 .addGap(16, 16, 16)
                 .addComponent(jlListado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,15 +315,214 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRBactivaActionPerformed
 
-    private void jRBactiva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBactiva1ActionPerformed
+    private void jRBinactivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBinactivaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRBactiva1ActionPerformed
+    }//GEN-LAST:event_jRBinactivaActionPerformed
 
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        // TODO add your handling code here:
+        if (jtfDNI.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Primero debe seleccionar una alumno o ingresar su DNI.");
+            return;
+        }
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro que quiere eliminar este alumno?",
+                "Confirmar eliminación",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        try {
+            int dni = Integer.parseInt(jtfDNI.getText().trim());
+
+            alumnoData ad = new alumnoData();
+            ad.borrarAlumno(dni);
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Alumno eliminado correctamente."
+            );
+
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+            jRBactiva.setSelected(true);
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "El DNI debe ser un número entero."
+            );
+        }
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        String dniTexto = jtfDNI.getText().trim();
+        String apynom = jtfNombreApellido.getText().trim();
+        String fechaNacTexto = jtfFechaNac.getText().trim();
+
+        if (dniTexto.isEmpty() || apynom.isEmpty() || fechaNacTexto.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+            return;
+        }
+
+        try {
+            int dni = Integer.parseInt(dniTexto);
+            java.time.LocalDate fechaNac = java.time.LocalDate.parse(fechaNacTexto);
+            boolean estadob = jRBactiva.isSelected();
+            alumno alum = new alumno(dni, apynom, fechaNac, estadob);
+            alumnoData ad = new alumnoData();
+            ad.guardarAlumno(alum);
+
+            jRBactiva.setSelected(true);
+            modelo.addRow(new Object[]{dni, apynom, fechaNac, estadob});
+
+            jtfDNI.setText("");
+            jtfNombreApellido.setText("");
+            jtfFechaNac.setText("");
+            jRBactiva.setSelected(true);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Alumno guardado correctamente.");
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "El DNI debe ser un número entero."
+            );
+
+        } catch (java.time.format.DateTimeParseException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Formato de fecha inválido. Use AAAA-MM-DD."
+            );
+    }//GEN-LAST:event_jbGuardarActionPerformed
+    }
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        jtfDNI.setText("");
+        jtfNombreApellido.setText("");
+        jtfFechaNac.setText("");
+        jRBactiva.setSelected(true);
+        jtfDNI.setEditable(false);
+        jtfNombreApellido.requestFocus();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostrarActionPerformed
+        // TODO add your handling code here:
+        alumnoData ad = new alumnoData();
+        List<alumno> alumnos = ad.listarAlumnos();
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        for (alumno a : alumnos) {
+            modelo.addRow(new Object[]{
+                a.getIdAlumno(),
+                a.getDni(),
+                a.getNombre(),
+                a.getFechaNac(),
+                a.isActivo() ? "Activo" : "Inactivo"
+            });
+        }
+
+    }//GEN-LAST:event_jbMostrarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+        if (jtfDNI.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Primero debe buscar un alumno o ingresar su dni.");
+            return;
+        }
+        String apynom = jtfNombreApellido.getText().trim();
+        String jtfFechaNacTexto = jtfFechaNac.getText().trim();
+
+        if (apynom.isEmpty() || jtfFechaNacTexto.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+            return;
+        }
+        try {
+            int dni = Integer.parseInt(jtfDNI.getText().trim());
+            java.time.LocalDate fechaNac = java.time.LocalDate.parse(jtfFechaNacTexto);
+            boolean activo = jRBactiva.isSelected();
+
+            alumno a = new alumno(dni, apynom, fechaNac, activo);
+            alumnoData ad = new alumnoData();
+            ad.actualizarAlumno(a);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente.");
+            return;
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "En DNI debe ser un número entero."
+            );
+
+        } catch (java.time.format.DateTimeParseException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Formato de fecha inválido. Use AAAA-MM-DD."
+            );
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbAltaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaBajaActionPerformed
+        // TODO add your handling code here:
+        if (jtfDNI.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Primero debe buscar un alumno o ingresar su dni.");
+            return;
+        }
+
+        try {
+            int dni = Integer.parseInt(jtfDNI.getText().trim());
+            alumnoData ad = new alumnoData();
+
+            if (jRBactiva.isSelected()) {
+                ad.altaLogica(dni);
+                //javax.swing.JOptionPane.showMessageDialog(this, "Alumno dado de alta.");
+            } else if (jRBinactiva.isSelected()) {
+                ad.bajaLogica(dni);
+                //javax.swing.JOptionPane.showMessageDialog(this, "Alumno dado de baja.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Seleccione Activo o Inactivo.");
+            }
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "DNI incorrecto.");
+        }
+    }//GEN-LAST:event_jbAltaBajaActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int dni = Integer.parseInt(jtfDNI.getText().trim());
+
+            alumnoData ad = new alumnoData();
+            alumno a = ad.buscarAlumno(dni);
+
+            if (a != null) {
+                jtfNombreApellido.setText(a.getNombre());
+                jtfFechaNac.setText(String.valueOf(a.getFechaNac()));
+
+                if (a.isActivo()) {
+                    jRBactiva.setSelected(true);
+                } else {
+                    jRBinactiva.setSelected(true);
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this, "No se encontró el alumno."
+                );
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "En DNI debe ser un número entero."
+            );
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JRadioButton jRBactiva;
-    private javax.swing.JRadioButton jRBactiva1;
+    private javax.swing.JRadioButton jRBinactiva;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbActualizar;
@@ -271,6 +536,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlDNI;
     private javax.swing.JLabel jlDatos;
     private javax.swing.JLabel jlFechaNac;
+    private javax.swing.JLabel jlFormato;
     private javax.swing.JLabel jlListado;
     private javax.swing.JLabel jlNombreApellido;
     private javax.swing.JLabel jlTitulo;

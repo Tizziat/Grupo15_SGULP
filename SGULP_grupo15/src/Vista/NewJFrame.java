@@ -58,6 +58,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jmAlumno.setText("Alumno");
 
         jMenuItem2.setText("Formulario de Alumnos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jmAlumno.add(jMenuItem2);
 
         jMenuBar1.add(jmAlumno);
@@ -82,6 +87,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jMenuItem4.setText("Salir");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jmSalir.add(jMenuItem4);
 
         jMenuBar1.add(jmSalir);
@@ -100,6 +110,18 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmSalirActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        vistaAlumno va = new vistaAlumno();
+        jdEscritorio.add(va).setVisible(true);
+        va.toFront();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

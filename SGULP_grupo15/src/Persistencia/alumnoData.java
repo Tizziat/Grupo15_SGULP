@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class alumnoData {
     private Connection con = null;
@@ -142,6 +143,36 @@ public class alumnoData {
             
         } catch (SQLException ex) {
             Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void altaLogica(int dni){
+        String query = "UPDATE alumno SET activo = 1 WHERE dni = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, dni);
+            int filas = ps.executeUpdate();
+            if(filas > 0){
+                JOptionPane.showMessageDialog(null, "Alumno dado de alta");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al dar de alta: " + ex.getMessage());
+        }
+    }
+    
+    public void bajaLogica(int dni){
+        String query = "UPDATE alumno SET activo = 0 WHERE dni = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, dni);
+            int filas = ps.executeUpdate();
+            if(filas > 0){
+                JOptionPane.showMessageDialog(null, "Alumno dado de baja");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al dar de baja: " + ex.getMessage());
         }
     }
 }

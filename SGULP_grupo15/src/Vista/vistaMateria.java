@@ -20,7 +20,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
      * Creates new form vistaMateria
      */
     public vistaMateria() {
-        initComponents();
+    initComponents();
     ButtonGroup grupoEstado = new ButtonGroup();
     grupoEstado.add(jRBactiva);
     grupoEstado.add(jRBinactiva);
@@ -223,9 +223,8 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jBnuevo)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jBguardar)
                         .addGap(18, 18, 18)
                         .addComponent(jBactualizar)
