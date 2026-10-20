@@ -25,7 +25,12 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         armarCabecera();
     }
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        
+        public boolean isCellEditable(int fila, int columna){
+            return false;
+        }
+    };
 
     private void armarCabecera() {
         modelo.addColumn("ID");
@@ -97,7 +102,15 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -527,11 +540,14 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
                 }
             } else {
                 if (jRBactiva.isSelected()) {
-                    ad.altaLogica(dni);
-                } else {
                     ad.bajaLogica(dni);
+                } else {
+                    ad.altaLogica(dni);
                 }
-            }            
+            }   
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Estado actualizado correctamente.");
+            jbMostrarActionPerformed(null);
             jtfDNI.setText("");
             jtfNombreApellido.setText("");
             jtfFechaNac.setText("");
@@ -587,6 +603,14 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             jtfDNI.setText(jTable1.getValueAt(fila, 1).toString());
             jtfNombreApellido.setText(jTable1.getValueAt(fila, 2).toString());
             jtfFechaNac.setText(jTable1.getValueAt(fila, 3).toString());
+            
+            
+            String estado = jTable1.getValueAt(fila, 4).toString();
+            if(estado.equalsIgnoreCase("Activo")){
+                jRBactiva.setSelected(true);
+            } else {
+                jRBinactiva.setSelected(true);
+            }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
