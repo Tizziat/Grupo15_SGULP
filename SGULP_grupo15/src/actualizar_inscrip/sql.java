@@ -1,0 +1,2 @@
+ALTER TABLE materia
+ADD COLUMN nota DECIMAL;
