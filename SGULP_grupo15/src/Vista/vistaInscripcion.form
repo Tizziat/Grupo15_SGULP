@@ -48,45 +48,43 @@
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jlListado" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlNueva" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="438" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jbVerInscripciones" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jbAnular" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jbActualizar" min="-2" pref="137" max="-2" attributes="0"/>
+                              <Component id="jlNueva" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jbVerInscripciones" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jbAnular" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jbActualizar" min="-2" pref="137" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jrbMateriasInsc" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jrbMateriasNoInsc" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jlAlumno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlMateria" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlNota" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jrbMateriasInsc" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jrbMateriasNoInsc" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jcbMateria" min="-2" pref="209" max="-2" attributes="0"/>
+                                      <Component id="jcbAlumno" min="-2" pref="209" max="-2" attributes="0"/>
+                                      <Component id="jtfNota" min="-2" pref="209" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlAlumno" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlMateria" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlNota" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jcbMateria" pref="209" max="32767" attributes="0"/>
-                                          <Component id="jcbAlumno" max="32767" attributes="0"/>
-                                          <Component id="jtfNota" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jbInscribir" alignment="1" pref="120" max="32767" attributes="0"/>
-                                          <Component id="jbLimpiar" alignment="1" pref="120" max="32767" attributes="0"/>
-                                          <Component id="jbCargar" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jbInscribir" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jbLimpiar" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jbCargar" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="484" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

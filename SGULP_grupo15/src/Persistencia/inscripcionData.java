@@ -106,7 +106,8 @@ public class inscripcionData {
     
     
     // anulamos - borramos la inscripcion
-    public void borrarInscripcion(int idAlumno, int idMateria) {
+    public void anularInscripcion(int idAlumno, int idMateria) {
+       
         String sql = "DELETE FROM cursada WHERE idAlumno = ? AND idMateria = ?";
         
         try {

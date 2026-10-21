@@ -271,35 +271,34 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
                         .addGap(21, 21, 21)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlListado)
-                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlNueva)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addComponent(jbVerInscripciones, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addComponent(jrbMateriasInsc)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jrbMateriasNoInsc))
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlAlumno)
-                                        .addComponent(jlMateria)
-                                        .addComponent(jlNota))
-                                    .addGap(35, 35, 35)
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jcbMateria, 0, 209, Short.MAX_VALUE)
-                                        .addComponent(jcbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtfNota))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jbInscribir, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                        .addComponent(jbLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                        .addComponent(jbCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(jlNueva)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jbVerInscripciones, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jrbMateriasInsc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jrbMateriasNoInsc))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlAlumno)
+                                    .addComponent(jlMateria)
+                                    .addComponent(jlNota))
+                                .addGap(35, 35, 35)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfNota, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jbInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,36 +355,32 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
-        // TODO add your handling code here:
-        int fila = jTable1.getSelectedRow();
-        if (fila == 1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia de la tabla.");
+        // TODO add your handling code herejava.awt.event.ActionEvent evt) {
+
+    int fila = jTable1.getSelectedRow();
+
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Seleccione una inscripción");
+        return;
+    }
+
+    try {
+        double nota = Double.parseDouble(jtfNota.getText());
+
+        if (nota < 0 || nota > 10) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "La nota debe estar entre 0 y 10");
             return;
         }
-        alumno al = (alumno) jcbAlumno.getSelectedItem();
-        if (al == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno.");
-            return;
-        }
-        int idMateria = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
-        String nombreMateria = (jTable1.getValueAt(fila, 1).toString());
-        String inputNota = JOptionPane.showInputDialog(this, "Ingrese la nota para " + nombreMateria);
 
-        if (inputNota != null && !inputNota.trim().isEmpty()) {
-            try {
-                double nota = Double.parseDouble(inputNota.trim());
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Nota ingresada: " + nota);
 
-                if (nota >= 0 && nota <= 10) {
-                    iData.actualizarNota(al.getIdAlumno(), idMateria, nota);
-                    JOptionPane.showMessageDialog(this, "Nota actualizada con éxito.");
-                    cargarTabla();
-                } else {
-                    JOptionPane.showMessageDialog(this, "La nota debe ser un número entre 0 y 10.");
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Formato inválido. Debe ingresar un número válido (ej: 8 o 7.5).");
-            }
-        }
+    } catch (NumberFormatException ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Ingrese una nota válida");
+    }
     }//GEN-LAST:event_jbCargarActionPerformed
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
@@ -409,18 +404,14 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
-        jtfNota.setText("");
+        
     
         jcbAlumno.setSelectedIndex(-1);
         jcbMateria.setSelectedIndex(-1);
-    
+        jtfNota.setText("");
         jrbMateriasInsc.setSelected(true);
     
-        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
-            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
-            modeloTabla.removeRow(i);
-    
-        }
+        
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
@@ -439,10 +430,24 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jbAnularActionPerformed
+       int fila = jTable1.getSelectedRow();
 
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, "Seleccione una inscripción");
+        return;
+    }
+
+    javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel)
+            jTable1.getModel();
+
+    modelo.removeRow(fila);
+        
+       
+   
+    }//GEN-LAST:event_jbAnularActionPerformed
+    
     private void jbVerInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerInscripcionesActionPerformed
         // TODO add your handling code here:
         cargarTabla();
@@ -454,10 +459,33 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
-        cargarComboAlumnos();
-        cargarComboMaterias();
-        cargarTabla();
-        JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
+//        cargarComboAlumnos();
+//        cargarComboMaterias();
+//        cargarTabla();
+//        JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
+        int fila = jTable1.getSelectedRow();
+
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Seleccione una inscripción");
+        return;
+    }
+
+    if (jcbMateria.getSelectedItem() == null) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Seleccione una materia");
+        return;
+    }
+
+    javax.swing.table.DefaultTableModel modelo =
+        (javax.swing.table.DefaultTableModel)
+        jTable1.getModel();
+
+    modelo.setValueAt(jcbMateria.getSelectedItem(), fila, 1);
+
+    javax.swing.JOptionPane.showMessageDialog(
+        this, "Materia actualizada en la tabla");
+
     }//GEN-LAST:event_jbActualizarActionPerformed
 
 
