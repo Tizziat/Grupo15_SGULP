@@ -10,6 +10,7 @@ import Persistencia.alumnoData;
 import Persistencia.inscripcionData;
 import Persistencia.materiaData;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -54,8 +55,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private void cargarComboAlumnos(){
         jcbAlumno.removeAllItems();
         List<alumno> listaAlumnos = aData.listarAlumnos();
-        for(alumno a : listaAlumnos){
-            if(a.isActivo()){
+        for (alumno a : listaAlumnos) {
+            if (a.isActivo()) {
                 jcbAlumno.addItem(a);
             }
         }
@@ -64,8 +65,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private void cargarComboMaterias(){
         jcbMateria.removeAllItems();
         List<materia> listaMaterias = mData.listarMaterias();
-        for(materia m : listaMaterias){
-            if(m.isEstado()){
+        for (materia m : listaMaterias) {
+            if (m.isEstado()) {
                 jcbMateria.addItem(m);
             }
         }
@@ -74,16 +75,16 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private void cargarTabla(){
         modelo.setRowCount(0);
         alumno al = (alumno) jcbAlumno.getSelectedItem();
-        
-        if(al != null){
-            if(jrbMateriasInsc.isSelected()){
+
+        if (al != null) {
+            if (jrbMateriasInsc.isSelected()) {
                 List<materia> cursadas = iData.obtenerMateriasCursadas(al.getIdAlumno());
-                for(materia m : cursadas){
+                for (materia m : cursadas) {
                     modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
                 }
-            } else if(jrbMateriasNoInsc.isSelected()){
+            } else if (jrbMateriasNoInsc.isSelected()) {
                 List<materia> noCursadas = iData.obtenerMateriasNOCursadas(al.getIdAlumno());
-                for(materia m : noCursadas){
+                for (materia m : noCursadas) {
                     modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
                 }
             }
@@ -329,6 +330,35 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
         // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        if (fila == 1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia de la tabla.");
+            return;
+        }
+        alumno al = (alumno) jcbAlumno.getSelectedItem();
+        if (al == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno.");
+            return;
+        }
+        int idMateria = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
+        String nombreMateria = (jTable1.getValueAt(fila, 1).toString());
+        String inputNota = JOptionPane.showInputDialog(this, "Ingrese la nota para " + nombreMateria);
+
+        if (inputNota != null && !inputNota.trim().isEmpty()) {
+            try {
+                double nota = Double.parseDouble(inputNota.trim());
+
+                if (nota >= 0 && nota <= 10) {
+                    iData.actualizarNota(al.getIdAlumno(), idMateria, nota);
+                    JOptionPane.showMessageDialog(this, "Nota actualizada con éxito.");
+                    cargarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La nota debe ser un número entre 0 y 10.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Formato inválido. Debe ingresar un número válido (ej: 8 o 7.5).");
+            }
+        }
     }//GEN-LAST:event_jbCargarActionPerformed
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
@@ -364,6 +394,17 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         // TODO add your handling code here:
+        alumno al = (alumno) jcbAlumno.getSelectedItem();
+        materia mat = (materia) jcbMateria.getSelectedItem();
+        
+        if(al == null || mat == null){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno y una materia.");
+            return;
+        } 
+        
+        iData.guardarInscripcion(al.getIdAlumno(), mat.getIdMateria());
+        JOptionPane.showMessageDialog(this, "Inscripcion registrada.");
+        cargarTabla();
     }//GEN-LAST:event_jbInscribirActionPerformed
 
 
