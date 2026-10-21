@@ -110,10 +110,12 @@
                       <Component id="jbLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbCargar" alignment="3" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jtfNota" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jlNota" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbCargar" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jlNota" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -126,7 +128,7 @@
                   <Component id="jScrollPane1" min="-2" pref="159" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbAnular" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="jbActualizar" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
@@ -266,16 +268,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Inscripciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbVerInscripcionesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbActualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbActualizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbAnular">
           <Properties>
             <Property name="text" type="java.lang.String" value="Anular Inscripci&#xf3;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAnularActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbCargar">
           <Properties>
@@ -309,6 +320,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfNota">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNotaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNota">
           <Properties>

@@ -82,7 +82,7 @@ public class materiaData {
     // 3. SELECT * FROM materia (listar materias)
     public List<materia> listarMaterias() {
         List<materia> materias = new ArrayList<>();
-        String sql = "SELECT * FROM materia WHERE estado = 1";
+        String sql = "SELECT * FROM materia";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);

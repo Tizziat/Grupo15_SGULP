@@ -55,7 +55,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 563, Short.MAX_VALUE)
         );
 
         getContentPane().add(jdEscritorio, java.awt.BorderLayout.CENTER);

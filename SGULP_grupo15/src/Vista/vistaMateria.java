@@ -194,7 +194,20 @@ if (ui instanceof javax.swing.plaf.basic.BasicInternalFrameUI) {
             new String [] {
                 "Codigo", "Nombre", "Año", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTresultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTresultadoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTresultado);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -424,20 +437,21 @@ if (ui instanceof javax.swing.plaf.basic.BasicInternalFrameUI) {
             materiaData md = new materiaData();
 
             if (jRBactiva.isSelected()) {
-                md.altaLogica(codigo);
-                javax.swing.JOptionPane.showMessageDialog(
-                    this, "Materia dada de alta."
-                );
-            } else if (jRBinactiva.isSelected()) {
                 md.bajaLogica(codigo);
                 javax.swing.JOptionPane.showMessageDialog(
                     this, "Materia dada de baja."
+                );
+            } else if (jRBinactiva.isSelected()) {
+                md.altaLogica(codigo);
+                javax.swing.JOptionPane.showMessageDialog(
+                    this, "Materia dada de alta."
                 );
             } else {
                 javax.swing.JOptionPane.showMessageDialog(
                     this, "Seleccione Activa o Inactiva."
                 );
             }
+            jBmostrar.doClick();
 
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(
@@ -559,6 +573,27 @@ if (ui instanceof javax.swing.plaf.basic.BasicInternalFrameUI) {
     private void jTFcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFcodigoActionPerformed
+
+    private void jTresultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTresultadoMouseClicked
+        // TODO add your handling code here:
+    int fila = jTresultado.getSelectedRow();
+    
+        if (fila != -1) {
+        // 1. Cargar los datos de la fila seleccionada en los JTextFields
+        jTFcodigo.setText(jTresultado.getValueAt(fila, 0).toString());
+        jTFnombre.setText(jTresultado.getValueAt(fila, 1).toString());
+        jTFaño.setText(jTresultado.getValueAt(fila, 2).toString());
+
+        // 2. Determinar y seleccionar el RadioButton de estado
+        String estadoStr = jTresultado.getValueAt(fila, 3).toString();
+        if (estadoStr.equalsIgnoreCase("Activa") || estadoStr.equals("true") || estadoStr.equals("1")) {
+            jRBactiva.setSelected(true);
+        } else {
+            jRBinactiva.setSelected(true);
+        }
+    }
+        
+    }//GEN-LAST:event_jTresultadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
