@@ -29,16 +29,21 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jdEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmiAlumno = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmiMateria = new javax.swing.JMenuItem();
+        jmInscripcion = new javax.swing.JMenu();
+        jmiInscripcion = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem5.setText("jMenuItem5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,27 +62,49 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jmAlumno.setText("Alumno");
 
-        jMenuItem2.setText("Formulario de Alumnos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmiAlumno.setText("Formulario de Alumnos");
+        jmiAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmiAlumnoActionPerformed(evt);
             }
         });
-        jmAlumno.add(jMenuItem2);
+        jmAlumno.add(jmiAlumno);
 
         jMenuBar1.add(jmAlumno);
 
         jmMateria.setText("Materia");
 
-        jMenuItem3.setText("Formulario de Materias");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmiMateria.setText("Formulario de Materias");
+        jmiMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmiMateriaActionPerformed(evt);
             }
         });
-        jmMateria.add(jMenuItem3);
+        jmMateria.add(jmiMateria);
 
         jMenuBar1.add(jmMateria);
+
+        jmInscripcion.setText("Inscripcion");
+        jmInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmInscripcionMouseClicked(evt);
+            }
+        });
+
+        jmiInscripcion.setText("Formulario de Inscripcion");
+        jmiInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmiInscripcionMouseClicked(evt);
+            }
+        });
+        jmiInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInscripcionActionPerformed(evt);
+            }
+        });
+        jmInscripcion.add(jmiInscripcion);
+
+        jMenuBar1.add(jmInscripcion);
 
         jmSalir.setText("Salir");
         jmSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -86,13 +113,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem4.setText("Salir");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jmiSalirActionPerformed(evt);
             }
         });
-        jmSalir.add(jMenuItem4);
+        jmSalir.add(jmiSalir);
 
         jMenuBar1.add(jmSalir);
 
@@ -101,27 +128,42 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmiMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMateriaActionPerformed
       vistaMateria vm = new vistaMateria();
       jdEscritorio.add(vm).setVisible(true);
       vm.toFront();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmiMateriaActionPerformed
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmSalirActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmiAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlumnoActionPerformed
         // TODO add your handling code here:
         vistaAlumno va = new vistaAlumno();
         jdEscritorio.add(va).setVisible(true);
         va.toFront();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmiAlumnoActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jmiSalirActionPerformed
+
+    private void jmiInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiInscripcionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiInscripcionMouseClicked
+
+    private void jmInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmInscripcionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmInscripcionMouseClicked
+
+    private void jmiInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInscripcionActionPerformed
+        // TODO add your handling code here:
+        vistaInscripcion vi = new vistaInscripcion();
+        jdEscritorio.add(vi).setVisible(true);
+        vi.toFront();
+    }//GEN-LAST:event_jmiInscripcionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,12 +193,15 @@ public class NewJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenu jmAlumno;
+    private javax.swing.JMenu jmInscripcion;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenuItem jmiAlumno;
+    private javax.swing.JMenuItem jmiInscripcion;
+    private javax.swing.JMenuItem jmiMateria;
+    private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }
