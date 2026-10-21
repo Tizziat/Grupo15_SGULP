@@ -117,6 +117,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         jbCargar = new javax.swing.JButton();
         jrbMateriasInsc = new javax.swing.JRadioButton();
         jrbMateriasNoInsc = new javax.swing.JRadioButton();
+        jtfNota = new javax.swing.JTextField();
+        jlNota = new javax.swing.JLabel();
 
         jlTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlTitulo.setText("Gestión de Inscripciones");
@@ -135,9 +137,17 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Materia", "Año", "Nota"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jlAlumno.setText("Alumno: ");
@@ -157,6 +167,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         });
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +186,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
         jbAnular.setText("Anular Inscripción");
 
-        jbCargar.setText("Cargar Notas");
+        jbCargar.setText("Cargar Nota");
         jbCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCargarActionPerformed(evt);
@@ -195,6 +210,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
             }
         });
 
+        jlNota.setText("Nota:");
+
         jDesktopPane1.setLayer(jlTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlNueva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlListado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -211,6 +228,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jbCargar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jrbMateriasInsc, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jrbMateriasNoInsc, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfNota, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlNota, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -226,33 +245,33 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlListado)
                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jlNueva)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                     .addComponent(jbVerInscripciones, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jlNueva)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jrbMateriasInsc)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jrbMateriasNoInsc))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlAlumno)
+                                        .addComponent(jlMateria)
+                                        .addComponent(jlNota))
+                                    .addGap(35, 35, 35)
                                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jlAlumno)
-                                                .addComponent(jlMateria))
-                                            .addGap(35, 35, 35)
-                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jcbMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jcbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jrbMateriasInsc)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                            .addComponent(jrbMateriasNoInsc)))
+                                        .addComponent(jcbMateria, 0, 209, Short.MAX_VALUE)
+                                        .addComponent(jcbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtfNota))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jbInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jbInscribir, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                        .addComponent(jbLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                        .addComponent(jbCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -274,19 +293,24 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
                     .addComponent(jbLimpiar))
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCargar)
+                    .addComponent(jbCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfNota, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlNota))
+                .addGap(33, 33, 33)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbMateriasInsc)
                     .addComponent(jrbMateriasNoInsc))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlListado)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbVerInscripciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbVerInscripciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,6 +362,10 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         cargarTabla();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbInscribirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -355,9 +383,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlAlumno;
     private javax.swing.JLabel jlListado;
     private javax.swing.JLabel jlMateria;
+    private javax.swing.JLabel jlNota;
     private javax.swing.JLabel jlNueva;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JRadioButton jrbMateriasInsc;
     private javax.swing.JRadioButton jrbMateriasNoInsc;
+    private javax.swing.JTextField jtfNota;
     // End of variables declaration//GEN-END:variables
 }
