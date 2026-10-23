@@ -75,6 +75,8 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jlFormato = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jlTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlTitulo.setText("Gestión De Alumnos");
 

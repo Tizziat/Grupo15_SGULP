@@ -5,6 +5,9 @@
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -46,16 +49,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jlListado" min="-2" max="-2" attributes="0"/>
                               <Component id="jlNueva" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jbVerInscripciones" min="-2" pref="137" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jbAnular" min="-2" pref="137" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jbActualizar" min="-2" pref="137" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jrbMateriasInsc" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -71,16 +67,24 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jcbMateria" min="-2" pref="209" max="-2" attributes="0"/>
                                       <Component id="jcbAlumno" min="-2" pref="209" max="-2" attributes="0"/>
-                                      <Component id="jtfNota" min="-2" pref="209" max="-2" attributes="0"/>
+                                      <Component id="jtfNota" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jbInscribir" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jbLimpiar" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jbCargar" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jbLimpiar" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jbInscribir" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="484" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="jbVerInscripciones" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jbAnular" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jbActualizar" min="-2" pref="137" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -109,7 +113,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jtfNota" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jtfNota" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbCargar" alignment="3" max="32767" attributes="0"/>
                           <Component id="jlNota" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -207,6 +211,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

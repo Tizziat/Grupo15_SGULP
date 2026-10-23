@@ -125,6 +125,25 @@ public class inscripcionData {
         }
     }
     
+    // obtenemos la nota de un alumno
+    public double obtenerNota(int idAlumno, int idMateria) {
+        String sql = "SELECT nota FROM cursada WHERE idAlumno = ? AND idMateria = ?";
+        double nota = 0.0;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                nota = rs.getDouble("nota");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la nota: " + ex.getMessage());
+        }
+        return nota;
+    }
+    
     // actualizamos la nota de x alumno en x materia
     public void actualizarNota(int idAlumno, int idMateria, double nota){
         String sql = "UPDATE cursada SET nota = ? WHERE idAlumno = ? AND idMateria = ?";

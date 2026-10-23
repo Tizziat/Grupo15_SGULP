@@ -93,6 +93,7 @@ if (ui instanceof javax.swing.plaf.basic.BasicInternalFrameUI) {
 
         jRadioButton1.setText("jRadioButton1");
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(492, 491));
 
         escritorio.setBackground(new java.awt.Color(204, 204, 204));
