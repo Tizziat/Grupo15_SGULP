@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 // estabelcemos la conexion con la base de datos
-public class miConexion {
+public class MiConexion {
     private static String url = "jdbc:mariadb://localhost:3306/universidad_grupo15";
     private static String usuario = "root";
     private static String password = "";

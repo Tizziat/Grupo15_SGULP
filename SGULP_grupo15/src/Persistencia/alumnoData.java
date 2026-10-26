@@ -1,6 +1,6 @@
 package Persistencia;
-import Modelo.alumno;
-import Modelo.miConexion;
+import Modelo.Alumno;
+import Modelo.MiConexion;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,16 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class alumnoData {
+public class AlumnoData {
     private Connection con = null;
 
-    public alumnoData() {
+    public AlumnoData() {
         //conexión a la base de datos usando miConexion
-        this.con = miConexion.getConexion();
+        this.con = MiConexion.getConexion();
     }
 
     // 1. INSERT INTO ALUMNO
-    public void guardarAlumno(alumno a) {
+    public void guardarAlumno(Alumno a) {
         String sql = "INSERT INTO alumno (dni, nombre, fechaNac, activo) VALUES (?, ?, ?, ?)"; // 1
         
         try {
@@ -50,9 +50,9 @@ public class alumnoData {
     }
 
     // 2. SELECT 1 ALUMNO (Buscar por ID)
-    public alumno buscarAlumno(int dni) {
+    public Alumno buscarAlumno(int dni) {
         String sql = "SELECT * FROM alumno WHERE dni = ?"; // 1
-        alumno a = null;
+        Alumno a = null;
         
         try {
             PreparedStatement ps = con.prepareStatement(sql); // 2
@@ -60,7 +60,7 @@ public class alumnoData {
             ResultSet rs = ps.executeQuery(); // 3
             
             if (rs.next()) { 
-                a = new alumno();
+                a = new Alumno();
                 a.setIdAlumno(rs.getInt("idAlumno"));
                 a.setDni(rs.getInt("dni"));
                 a.setNombre(rs.getString("nombre"));
@@ -73,14 +73,14 @@ public class alumnoData {
             
         } catch (SQLException ex) {
             javax.swing.JOptionPane.showMessageDialog(null, "Error al buscar alumno.");
-            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
     }
 
     // 3. SELECT * FROM ALUMNO (Listar todos)
-    public List<alumno> listarAlumnos() {
-        List<alumno> alumnos = new ArrayList<>();
+    public List<Alumno> listarAlumnos() {
+        List<Alumno> alumnos = new ArrayList<>();
         String query = "SELECT * FROM alumno"; // 1
         
         try {
@@ -88,7 +88,7 @@ public class alumnoData {
             ResultSet rs = ps.executeQuery(); // 3
             
             while (rs.next()) { // 4.
-                alumno a = new alumno();
+                Alumno a = new Alumno();
                 a.setIdAlumno(rs.getInt("idAlumno"));
                 a.setDni(rs.getInt("dni"));
                 a.setNombre(rs.getString("nombre"));
@@ -100,14 +100,14 @@ public class alumnoData {
             ps.close(); // 5
             
         } catch (SQLException ex) {
-            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return alumnos;
     }
         
       // 4. UPDATE SET ALUMNO (Actualizar datos)
-    public void actualizarAlumno(alumno a) {
+    public void actualizarAlumno(Alumno a) {
         String query = "UPDATE alumno SET nombre = ?, fechaNac = ?, activo = ? WHERE dni = ?"; // 1
         
         try {
@@ -126,7 +126,7 @@ public class alumnoData {
             ps.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -137,21 +137,24 @@ public class alumnoData {
         try {
             PreparedStatement ps = con.prepareStatement(query); // 2
             ps.setInt(1, dni);
-            
+
             int exito = ps.executeUpdate(); // 3
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente");
+                //JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun alumno con ese DNI.");
             }
             ps.close(); // 4
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el alumno" + ex.getMessage());
-            Logger.getLogger(alumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getErrorCode() == 1451 || ex.getMessage().contains("foreign key")) {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar, el alumno está inscripto en una materia.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar el alumno.");
+            }
         }
     }
-    
+
     public void altaLogica(int dni){
         String query = "UPDATE alumno SET activo = 1 WHERE dni = ?";
         try{
@@ -159,7 +162,7 @@ public class alumnoData {
             ps.setInt(1, dni);
             int filas = ps.executeUpdate();
             if(filas > 0){
-                JOptionPane.showMessageDialog(null, "Alumno dado de alta");
+                //JOptionPane.showMessageDialog(null, "Alumno dado de alta");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -174,7 +177,7 @@ public class alumnoData {
             ps.setInt(1, dni);
             int filas = ps.executeUpdate();
             if(filas > 0){
-                JOptionPane.showMessageDialog(null, "Alumno dado de baja");
+                //JOptionPane.showMessageDialog(null, "Alumno dado de baja");
             }
             ps.close();
         } catch (SQLException ex) {

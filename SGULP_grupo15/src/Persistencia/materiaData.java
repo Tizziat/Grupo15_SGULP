@@ -4,8 +4,8 @@
  */
 package Persistencia;
 
-import Modelo.materia;
-import Modelo.miConexion;
+import Modelo.Materia;
+import Modelo.MiConexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,19 +20,19 @@ import java.util.List;
  *
  * @author tizzi
  */
-public class materiaData {
+public class MateriaData {
     private Connection con = null;
 
-    public materiaData() {
-        this.con = miConexion.getConexion();
+    public MateriaData() {
+        this.con = MiConexion.getConexion();
     }
     
     // reutilizamos la logica y el codigo de alumno data reemplazando los campos sql, etc
     
     // 1. INSERT INTO MATERIA
-    public void guardarMateria(materia m) {
+    public void guardarMateria(Materia m) {
         String sql = "INSERT INTO materia (nombre, anio, estado) VALUES (?, ?, ?)";//1 
-        System.out.println("SQL QUE SE EJECUTA: " + sql);
+        //System.out.println("SQL QUE SE EJECUTA: " + sql);        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);//2
             ps.setString(1, m.getNombre());
@@ -44,7 +44,7 @@ public class materiaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 m.setIdMateria(rs.getInt(1));
-                System.out.println("Materia guardada con éxito. ID: " + m.getIdMateria());
+                System.out.println("Materia guardada con exito. || ID: " + m.getIdMateria());
             }
             ps.close();
 
@@ -54,8 +54,8 @@ public class materiaData {
     }
 
     // 2. SELECT MATERIA, (buscamos por id)
-    public materia buscarMateria(int id) {
-        materia m = null;
+    public Materia buscarMateria(int id) {
+        Materia m = null;
         String sql = "SELECT * FROM materia WHERE idMateria = ?";
 
         try {
@@ -64,7 +64,7 @@ public class materiaData {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                m = new materia();
+                m = new Materia();
                 m.setIdMateria(rs.getInt("idMateria"));
                 m.setNombre(rs.getString("nombre"));
                 m.setAnio(rs.getInt("anio"));
@@ -80,8 +80,8 @@ public class materiaData {
     }
 
     // 3. SELECT * FROM materia (listar materias)
-    public List<materia> listarMaterias() {
-        List<materia> materias = new ArrayList<>();
+    public List<Materia> listarMaterias() {
+        List<Materia> materias = new ArrayList<>();
         String sql = "SELECT * FROM materia";
 
         try {
@@ -89,7 +89,7 @@ public class materiaData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                materia m = new materia();
+                Materia m = new Materia();
                 m.setIdMateria(rs.getInt("idMateria"));
                 m.setNombre(rs.getString("nombre"));
                 m.setAnio(rs.getInt("anio"));
@@ -107,7 +107,7 @@ public class materiaData {
     }
 
     // 4. UPDATE SET MATERIA (actualizamos datos)
-    public void actualizarMateria(materia m) {
+    public void actualizarMateria(Materia m) {
         String sql = "UPDATE materia SET nombre = ?, anio = ?, estado = ? WHERE idMateria = ?";
 
         try {

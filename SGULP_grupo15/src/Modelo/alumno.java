@@ -3,7 +3,7 @@ package Modelo;
 import java.time.LocalDate;
 
 
-public class alumno {
+public class Alumno {
     private int idAlumno;
     private int dni;
     private String nombre; // !!!VARCHAr
@@ -11,10 +11,10 @@ public class alumno {
     private boolean activo; // !!!TYNYINT
 
     // constructores, vacio, completo y sin idAlumno para nuevos alumnos
-    public alumno() {
+    public Alumno() {
     }
 
-    public alumno(int idAlumno, int dni, String nombre, LocalDate fechaNac, boolean activo) {
+    public Alumno(int idAlumno, int dni, String nombre, LocalDate fechaNac, boolean activo) {
         this.idAlumno = idAlumno;
         this.dni = dni;
         this.nombre = nombre;
@@ -23,7 +23,7 @@ public class alumno {
     }
 
     
-    public alumno(int dni, String nombre, LocalDate fechaNac, boolean activo) {
+    public Alumno(int dni, String nombre, LocalDate fechaNac, boolean activo) {
         this.dni = dni;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
@@ -75,7 +75,7 @@ public class alumno {
     @Override
     public String toString(){
     
-            return idAlumno+"-"+nombre;
+            return idAlumno + " - " + nombre;
     }
     
 }

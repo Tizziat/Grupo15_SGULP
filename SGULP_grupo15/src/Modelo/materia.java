@@ -1,7 +1,7 @@
 package Modelo;
 
 
-public class materia {
+public class Materia {
     
     private int idMateria;
     private String nombre;
@@ -9,18 +9,18 @@ public class materia {
     private boolean estado; 
 
     // constructor vacio
-    public materia() {
+    public Materia() {
     }
 
     // constructor sin id materia
-    public materia(String nombre, int anio, boolean estado) {
+    public Materia(String nombre, int anio, boolean estado) {
         this.nombre = nombre;
         this.anio = anio;
         this.estado = estado;
     }
     
     // constructor completo
-    public materia(int idMateria, String nombre, int anio, boolean estado) {
+    public Materia(int idMateria, String nombre, int anio, boolean estado) {
         this.idMateria = idMateria;
         this.nombre = nombre;
         this.anio = anio;
@@ -61,7 +61,7 @@ public class materia {
     
     @Override
     public String toString() {
-        return nombre + " (" + anio + "º año)";
+        return nombre + " | " + " Anio: " + anio;
     } 
     
 }

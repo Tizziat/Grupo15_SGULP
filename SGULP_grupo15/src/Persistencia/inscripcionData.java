@@ -1,7 +1,7 @@
 package Persistencia;
 
-import Modelo.materia;
-import Modelo.miConexion;
+import Modelo.Materia;
+import Modelo.MiConexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
         
 
-public class inscripcionData {
+public class InscripcionData {
     
     private Connection con = null;
-    private materiaData mData = new materiaData();
-    private alumnoData aData = new alumnoData();
+    private MateriaData mData = new MateriaData();
+    private AlumnoData aData = new AlumnoData();
 
-    public inscripcionData() {
-        this.con = miConexion.getConexion();
+    public InscripcionData() {
+        this.con = MiConexion.getConexion();
     }
     
     // 1- inscribimos un alumno en una materia
@@ -45,8 +45,8 @@ public class inscripcionData {
     }
     
     // obtenemos las materias que cursa el alumno
-    public List<materia> obtenerMateriasCursadas(int idAlumno) {
-        List<materia> materias = new ArrayList<>();
+    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
+        List<Materia> materias = new ArrayList<>();
         String sql = "SELECT m.idMateria, m.nombre, m.anio, m.estado " +
                  "FROM materia m JOIN cursada c ON m.idMateria = c.idMateria " +
                  "WHERE c.idAlumno = ?";
@@ -57,7 +57,7 @@ public class inscripcionData {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            materia m = new materia();
+            Materia m = new Materia();
             m.setIdMateria(rs.getInt("idMateria"));
             m.setNombre(rs.getString("nombre"));
             m.setAnio(rs.getInt("anio"));
@@ -76,8 +76,8 @@ public class inscripcionData {
     
     
     // usando un NOT IN obtenemos las materias que el alumno NO cursa
-    public List<materia> obtenerMateriasNOCursadas(int idAlumno) {
-    List<materia> materias = new ArrayList<>();
+    public List<Materia> obtenerMateriasNOCursadas(int idAlumno) {
+    List<Materia> materias = new ArrayList<>();
     String sql = "SELECT * FROM materia WHERE estado = 1 AND idMateria NOT IN " +
                  "(SELECT idMateria FROM cursada WHERE idAlumno = ?)";
 
@@ -87,7 +87,7 @@ public class inscripcionData {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            materia m = new materia();
+            Materia m = new Materia();
             m.setIdMateria(rs.getInt("idMateria"));
             m.setNombre(rs.getString("nombre"));
             m.setAnio(rs.getInt("anio"));

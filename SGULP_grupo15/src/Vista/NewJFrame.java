@@ -129,9 +129,12 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMateriaActionPerformed
-      vistaMateria vm = new vistaMateria();
-      jdEscritorio.add(vm).setVisible(true);
-      vm.toFront();
+      jdEscritorio.removeAll();
+      jdEscritorio.repaint();
+      VistaMateria vm = new VistaMateria();
+      vm.setVisible(true);
+      jdEscritorio.add(vm);
+      jdEscritorio.moveToFront(vm);
     }//GEN-LAST:event_jmiMateriaActionPerformed
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
@@ -139,10 +142,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jmiAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlumnoActionPerformed
-        // TODO add your handling code here:
-        vistaAlumno va = new vistaAlumno();
-        jdEscritorio.add(va).setVisible(true);
-        va.toFront();
+      
+      jdEscritorio.removeAll();
+      jdEscritorio.repaint();
+      VistaAlumno va = new VistaAlumno();
+      va.setVisible(true);
+      jdEscritorio.add(va);
+      jdEscritorio.moveToFront(va);
     }//GEN-LAST:event_jmiAlumnoActionPerformed
 
     private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
@@ -159,10 +165,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jmInscripcionMouseClicked
 
     private void jmiInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInscripcionActionPerformed
-        // TODO add your handling code here:
-        vistaInscripcion vi = new vistaInscripcion();
-        jdEscritorio.add(vi).setVisible(true);
-        vi.toFront();
+      
+      jdEscritorio.removeAll();
+      jdEscritorio.repaint();
+      VistaInscripcion vi = new VistaInscripcion();
+      vi.setVisible(true);
+      jdEscritorio.add(vi);
+      jdEscritorio.moveToFront(vi);
     }//GEN-LAST:event_jmiInscripcionActionPerformed
 
     /**
